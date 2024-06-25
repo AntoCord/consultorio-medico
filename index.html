@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultorio Médico</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Logotipo Consultorio" id="logo">
+    </header>
+
+    <main>
+        <section id="mapa">
+            <h2>Encuéntranos</h2>
+            <div id="map"></div>
+        </section>
+
+        <section id="citas">
+            <h2>Agendar Cita</h2>
+            <form id="form-citas">
+                <label for="tipo">Tipo de Cita:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="medicina general">Medicina General</option>
+                    <option value="control embarazo">Control de Embarazo</option>
+                    <option value="control niño sano">Control de Niño Sano</option>
+                    <option value="planificación familiar">Planificación Familiar</option>
+                </select>
+                
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+                
+                <label for="hora">Hora:</label>
+                <select id="hora" name="hora" required></select>
+
+                <button type="submit">Agendar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Consultorio Médico. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
