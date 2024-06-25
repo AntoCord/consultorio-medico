@@ -1,56 +1,71 @@
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgb(254, 253, 249);
-    color: rgb(0, 0, 0);
+    background-color: #fefdf9;
+    color: #000;
 }
 
 header {
     text-align: center;
-    padding: 20px;
-    background-color: rgb(143, 124, 84);
+    margin: 20px 0;
 }
 
 #logo {
-    max-width: 200px;
+    max-width: 150px;
 }
 
 main {
     padding: 20px;
-    text-align: center;
+}
+
+/* Estilos para la sección Acerca de Nosotros */
+#acerca {
+    margin-bottom: 20px;
+}
+
+#acerca h2 {
+    color: #8f7c54;
+}
+
+#acerca p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+#mapa {
+    margin-bottom: 20px;
 }
 
 #map {
     width: 100%;
     height: 400px;
+}
+
+/* Estilos para la sección de Citas */
+#citas {
+    margin-bottom: 20px;
+}
+
+#form-citas {
+    display: flex;
+    flex-direction: column;
+}
+
+#form-citas label {
+    margin: 5px 0;
+}
+
+#form-citas input, #form-citas select {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el footer */
+footer {
+    text-align: center;
     margin: 20px 0;
-}
-
-section {
-    margin: 40px 0;
-}
-
-form {
-    display: inline-block;
-    text-align: left;
-}
-
-label, select, input {
-    display: block;
-    margin: 10px 0;
-}
-
-button {
-    background-color: rgb(143, 124, 84);
-    color: rgb(254, 253, 249);
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(0, 0, 0);
 }
 
 .redes-sociales {

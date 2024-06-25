@@ -18,6 +18,18 @@
     </header>
 
     <main>
+        <!-- Nueva sección: Acerca de Nosotros -->
+        <section id="acerca">
+            <h2>Quiénes Somos</h2>
+            <p>La <strong>Clínica La Perla</strong> es un centro médico comprometido con ofrecer atención de salud de alta calidad en nuestra comunidad. Con un equipo de profesionales dedicados y modernas instalaciones, brindamos un servicio integral que abarca desde la atención primaria hasta cuidados especializados. Nuestra misión es mejorar la calidad de vida de nuestros pacientes mediante un enfoque holístico, personalizado y basado en la evidencia.</p>
+            
+            <h2>Visión</h2>
+            <p>Ser líderes en la prestación de servicios de salud en la región, reconocidos por nuestra excelencia en atención médica, innovación, y compromiso con la comunidad. Aspiramos a ser el centro de referencia que marca la diferencia en la vida de nuestros pacientes a través de un cuidado excepcional y continuo.</p>
+            
+            <h2>Misión</h2>
+            <p>Nuestra misión es proporcionar servicios de salud accesibles, confiables y centrados en el paciente. Nos esforzamos por ofrecer un entorno seguro y acogedor, donde cada paciente reciba un tratamiento respetuoso y de alta calidad. Nos dedicamos a promover el bienestar y la prevención, así como a tratar enfermedades con un enfoque compasivo y ético.</p>
+        </section>
+
         <section id="mapa">
             <h2>Encuéntranos</h2>
             <div id="map"></div>
@@ -26,6 +38,9 @@
         <section id="citas">
             <h2>Agendar Cita</h2>
             <form id="form-citas">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
                 <label for="tipo">Tipo de Cita:</label>
                 <select id="tipo" name="tipo" required>
                     <option value="medicina general">Medicina General</option>
@@ -45,13 +60,13 @@
         </section>
     </main>
 
-   <footer>
-    <p>&copy; 2024 Clínica La Perla. Todos los derechos reservados.</p>
-    <div class="redes-sociales">
-        <a href="https://www.facebook.com/profile.php?id=61561198509995" target="_blank"><img src="images/facebook.png" alt="Facebook" class="logo-red-social"></a>
-        <a href="https://www.instagram.com/clinica_la_perla?igsh=MTIyMWs2cmt6c3RhMw%3D%3D&utm_source=qr" target="_blank"><img src="images/instagram.png" alt="Instagram" class="logo-red-social"></a>
-    </div>
-</footer>
+    <footer>
+        <p>&copy; 2024 Clínica La Perla. Todos los derechos reservados.</p>
+        <div class="redes-sociales">
+            <a href="https://www.facebook.com/profile.php?id=61561198509995" target="_blank"><img src="images/facebook.png" alt="Facebook" class="logo-red-social"></a>
+            <a href="https://www.instagram.com/clinica_la_perla?igsh=MTIyMWs2cmt6c3RhMw%3D%3D&utm_source=qr" target="_blank"><img src="images/instagram.png" alt="Instagram" class="logo-red-social"></a>
+        </div>
+    </footer>
 
     <!-- Script para inicializar Leaflet y el mapa -->
     <script>
@@ -77,6 +92,41 @@
             option.textContent = i + ':00';
             selectHora.appendChild(option);
         }
+
+        // Enviar formulario
+        document.getElementById('form-citas').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var nombre = document.getElementById('nombre').value;
+            var tipo = document.getElementById('tipo').value;
+            var fecha = document.getElementById('fecha').value;
+            var hora = document.getElementById('hora').value;
+
+            // Construir el mensaje de correo
+            var mensaje = `Nueva cita registrada:\nNombre: ${nombre}\nTipo de Cita: ${tipo}\nFecha: ${fecha}\nHora: ${hora}`;
+
+            // Enviar correo
+            fetch('send_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    tipo: tipo,
+                    fecha: fecha,
+                    hora: hora
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Correo enviado:', data);
+                alert('Cita registrada con éxito.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al registrar la cita.');
+            });
+        });
     </script>
 </body>
 </html>
