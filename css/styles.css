@@ -52,3 +52,24 @@ button {
 button:hover {
     background-color: rgb(0, 0, 0);
 }
+
+.redes-sociales {
+    text-align: center; /* Alinea los logotipos al centro */
+    margin-top: 10px; /* Espacio superior */
+}
+
+.redes-sociales a {
+    display: inline-block; /* Permite que los enlaces ocupen solo el espacio necesario */
+    margin: 0 5px; /* Espacio horizontal entre los logotipos */
+}
+
+.logo-red-social {
+    width: 20px; /* Ajusta el tamaño de los logotipos según sea necesario */
+    height: auto; /* Mantiene la proporción del logotipo */
+    opacity: 0.5; /* Opacidad para hacerlos más sutiles */
+    transition: opacity 0.3s ease; /* Transición suave de opacidad */
+}
+
+.logo-red-social:hover {
+    opacity: 1; /* Aumenta la opacidad al pasar el mouse para resaltar */
+}
