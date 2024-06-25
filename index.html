@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultorio Médico</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    <!-- Incluimos Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Incluimos Leaflet JavaScript y plugins -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Incluimos el archivo JavaScript principal -->
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -41,9 +46,33 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Consultorio Médico. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Clínica La Perla. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Script para inicializar Leaflet y el mapa -->
+    <script>
+        // Definimos las coordenadas de tu ubicación
+        var latitud = 14.91299;
+        var longitud = -92.26365;
+        var mapa = L.map('map').setView([latitud, longitud], 15); // Zoom 15
+
+        // Añadimos la capa de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(mapa);
+
+        // Añadimos un marcador en la ubicación del consultorio
+        var marcador = L.marker([latitud, longitud]).addTo(mapa);
+        marcador.bindPopup('<b>Consultorio Médico</b><br>¡Estamos aquí!').openPopup();
+
+        // Función para agregar opciones de hora al select
+        var selectHora = document.getElementById('hora');
+        for (var i = 8; i <= 17; i++) {
+            var option = document.createElement('option');
+            option.value = i + ':00';
+            option.textContent = i + ':00';
+            selectHora.appendChild(option);
+        }
+    </script>
 </body>
 </html>
