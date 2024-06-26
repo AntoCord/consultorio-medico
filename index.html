@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <style>
         /* Estilos */
         body {
@@ -108,7 +109,7 @@
 
         <section id="citas">
             <h2>Agendar Cita</h2>
-            <form id="form-citas" method="post" action="http://localhost:3000/crear-evento">
+            <form id="form-citas" onsubmit="enviarCorreo(event)">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -127,9 +128,7 @@
                 <input type="date" id="fecha" name="fecha" required>
                 
                 <label for="hora">Hora:</label>
-                <select id="hora" name="hora" required>
-                    <!-- Opciones de horas aquí -->
-                </select>
+                <select id="hora" name="hora" required></select>
 
                 <div class="g-recaptcha" data-sitekey="6LesagEqAAAAAHFMNNKNmAfFTPU4q9JlGV38VqLb"></div>
 
@@ -145,7 +144,6 @@
             <a href="https://www.instagram.com/clinica_la_perla?igsh=MTIyMWs2cmt6c3RhMw%3D%3D&utm_source=qr" target="_blank"><img src="images/instagram.png" alt="Instagram" class="logo-red-social"></a>
         </div>
     </footer>
-
 
     <!-- Script para inicializar Leaflet y el mapa -->
     <script>
