@@ -162,13 +162,14 @@
             option.value = i + ':00';
             option.textContent = i + ':00';
             selectHora.appendChild(option);
-        }
+   <script>
+   <script>
+        (function() {
+            emailjs.init('OS2tWAkFr_r5Cwcme');
+        })();
 
-        emailjs.init("wMu4881XfmY0Wg9e0"); // Reemplaza "service_nkfw88x" con tu ID de servicio real
-
-        document.getElementById('form-citas').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar el envío del formulario
-
+        function enviarCorreo(event) {
+            event.preventDefault();
             var nombre = document.getElementById('nombre').value;
             var correo = document.getElementById('correo').value;
             var tipo = document.getElementById('tipo').value;
@@ -176,20 +177,21 @@
             var hora = document.getElementById('hora').value;
 
             var templateParams = {
-                nombre: nombre,
-                correo: correo,
-                tipo: tipo,
-                fecha: fecha,
-                hora: hora
+                from_name: nombre,
+                to_name: 'Clínica La Perla',
+                message: `Nueva cita: ${tipo} el ${fecha} a las ${hora}.`,
+                reply_to: correo
             };
 
             emailjs.send('service_nkfw88x', 'template_7a8c3go', templateParams)
                 .then(function(response) {
-                    alert('Cita agendada correctamente.');
+                    console.log('Correo enviado!', response.status, response.text);
+                    alert('Cita agendada exitosamente!');
                 }, function(error) {
-                    alert('Error al agendar la cita: ' + error.text);
+                    console.error('Error al enviar el correo:', error);
+                    alert('Hubo un error al agendar la cita. Por favor, inténtelo de nuevo.');
                 });
-        });
+        }
     </script>
 </body>
 </html>
