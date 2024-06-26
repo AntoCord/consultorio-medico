@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <style>
         /* Estilos */
         body {
@@ -109,7 +109,7 @@
 
         <section id="citas">
             <h2>Agendar Cita</h2>
-            <form id="form-citas">
+            <form id="form-citas" onsubmit="enviarCorreo(event)">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -162,35 +162,35 @@
             option.value = i + ':00';
             option.textContent = i + ':00';
             selectHora.appendChild(option);
-   <script>
-   <script>
-        (function() {
-            emailjs.init('OS2tWAkFr_r5Cwcme');
-        })();
+        }
 
         function enviarCorreo(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevenir el envío del formulario
+
             var nombre = document.getElementById('nombre').value;
             var correo = document.getElementById('correo').value;
             var tipo = document.getElementById('tipo').value;
             var fecha = document.getElementById('fecha').value;
             var hora = document.getElementById('hora').value;
 
-            var templateParams = {
-                from_name: nombre,
-                to_name: 'Clínica La Perla',
-                message: `Nueva cita: ${tipo} el ${fecha} a las ${hora}.`,
-                reply_to: correo
-            };
-
-            emailjs.send('service_nkfw88x', 'template_7a8c3go', templateParams)
-                .then(function(response) {
-                    console.log('Correo enviado!', response.status, response.text);
-                    alert('Cita agendada exitosamente!');
-                }, function(error) {
-                    console.error('Error al enviar el correo:', error);
-                    alert('Hubo un error al agendar la cita. Por favor, inténtelo de nuevo.');
-                });
+            Email.send({
+                Host: "smtp.gmail.com", // Reemplaza con tu servidor SMTP
+                Username: "clinicalaperla@gmail.com", // Reemplaza con tu correo electrónico
+                Password: "Dosmasdoses5", // Reemplaza con tu contraseña SMTP
+                To: 'clinicalaperlatap@gmail.com', // Dirección de destino
+                From: correo, // Correo del usuario
+                Subject: "Nueva Cita Agendada",
+                Body: `
+                    <strong>Nombre:</strong> ${nombre}<br>
+                    <strong>Correo:</strong> ${correo}<br>
+                    <strong>Tipo de Cita:</strong> ${tipo}<br>
+                    <strong>Fecha:</strong> ${fecha}<br>
+                    <strong>Hora:</strong> ${hora}`
+            }).then(
+                message => alert('Cita agendada exitosamente!')
+            ).catch(
+                error => console.error('Error al enviar el correo:', error)
+            );
         }
     </script>
 </body>
