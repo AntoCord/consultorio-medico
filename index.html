@@ -74,36 +74,36 @@
             selectHora.appendChild(option);
         }
 
-        function enviarCorreo(event) {
-            event.preventDefault();
+  function enviarCorreo(event) {
+    event.preventDefault();
 
-            var nombre = document.getElementById('nombre').value;
-            var correo = document.getElementById('correo').value;
-            var tipo = document.getElementById('tipo').value;
-            var fecha = document.getElementById('fecha').value;
-            var hora = document.getElementById('hora').value;
+    var nombre = document.getElementById('nombre').value;
+    var correo = document.getElementById('correo').value;
+    var tipo = document.getElementById('tipo').value;
+    var fecha = document.getElementById('fecha').value;
+    var hora = document.getElementById('hora').value;
 
-            fetch('http://localhost:3000/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    nombre: nombre,
-                    correo: correo,
-                    tipo: tipo,
-                    fecha: fecha,
-                    hora: hora
-                })
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.success) {
-                      alert('Cita agendada exitosamente!');
-                  } else {
-                      alert('Error al agendar la cita.');
-                  }
-              }).catch(error => console.error('Error al enviar el correo:', error));
-        }
-    </script>
+    fetch('https://localhost:3000/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nombre: nombre,
+            correo: correo,
+            tipo: tipo,
+            fecha: fecha,
+            hora: hora
+        })
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              alert('Cita agendada exitosamente!');
+          } else {
+              alert('Error al agendar la cita.');
+          }
+      }).catch(error => console.error('Error al enviar el correo:', error));
+}
+ <script>
 </body>
 </html>
