@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <style>
-        /* Estilos */
-    </style>
 </head>
 <body>
     <header>
@@ -86,7 +83,7 @@
             var fecha = document.getElementById('fecha').value;
             var hora = document.getElementById('hora').value;
 
-            fetch('/send-email', {
+            fetch('http://localhost:3000/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
