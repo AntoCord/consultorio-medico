@@ -24,7 +24,7 @@
         </section>
         <section id="mapa">
             <h2>Encuéntranos</h2>
-            <div id="map"></div>
+            <div id="map" style="height: 400px;"></div>
         </section>
         <section id="citas">
             <h2>Agendar Cita</h2>
@@ -36,7 +36,7 @@
                 <label for="tipo">Tipo de Cita:</label>
                 <select id="tipo" name="tipo" required>
                     <option value="Medicina General">Medicina General</option>
-                    <!-- Más opciones -->
+                    <!-- Otras opciones -->
                 </select>
                 <label for="fecha">Fecha:</label>
                 <input type="date" id="fecha" name="fecha" required>
@@ -55,7 +55,8 @@
         </div>
     </footer>
 
-    <!-- Script para inicializar Leaflet y el mapa -->
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
     <script>
         var latitud = 14.91299;
         var longitud = -92.26365;
@@ -74,36 +75,36 @@
             selectHora.appendChild(option);
         }
 
-  function enviarCorreo(event) {
-    event.preventDefault();
+        function enviarCorreo(event) {
+            event.preventDefault();
 
-    var nombre = document.getElementById('nombre').value;
-    var correo = document.getElementById('correo').value;
-    var tipo = document.getElementById('tipo').value;
-    var fecha = document.getElementById('fecha').value;
-    var hora = document.getElementById('hora').value;
+            var nombre = document.getElementById('nombre').value;
+            var correo = document.getElementById('correo').value;
+            var tipo = document.getElementById('tipo').value;
+            var fecha = document.getElementById('fecha').value;
+            var hora = document.getElementById('hora').value;
 
-    fetch('https://localhost:3000/send-email', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            nombre: nombre,
-            correo: correo,
-            tipo: tipo,
-            fecha: fecha,
-            hora: hora
-        })
-    }).then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              alert('Cita agendada exitosamente!');
-          } else {
-              alert('Error al agendar la cita.');
-          }
-      }).catch(error => console.error('Error al enviar el correo:', error));
-}
- <script>
+            fetch('https://localhost:3000/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    correo: correo,
+                    tipo: tipo,
+                    fecha: fecha,
+                    hora: hora
+                })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert('Cita agendada exitosamente!');
+                  } else {
+                      alert('Error al agendar la cita.');
+                  }
+              }).catch(error => console.error('Error al enviar el correo:', error));
+        }
+    </script>
 </body>
 </html>
